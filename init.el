@@ -62,4 +62,5 @@
 (when (not (boundp 'ohai/wizard-did-run)) (ohai/load-modules))
 
 ;; activate rainbow-delimiters-mode in most programming modes
+(require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
