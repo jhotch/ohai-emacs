@@ -60,3 +60,6 @@
 
 ;; Load the enabled modules.
 (when (not (boundp 'ohai/wizard-did-run)) (ohai/load-modules))
+
+;; activate rainbow-delimiters-mode in most programming modes
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
