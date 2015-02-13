@@ -61,6 +61,11 @@
 ;; Load the enabled modules.
 (when (not (boundp 'ohai/wizard-did-run)) (ohai/load-modules))
 
+;; install dart mode
+(unless (package-installed-p 'dart-mode)
+  (package-install 'dart-mode))
+(require 'dart-mode)
+
 ;; install clojure mode and extra syntax highlighting
 (unless (package-installed-p 'clojure-mode)
   (package-install 'clojure-mode))
