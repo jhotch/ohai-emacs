@@ -20,6 +20,18 @@
 
 ;;; Code:
 
+;; Do an Emacs version check before going any further.
+(when (or (< emacs-major-version 24)
+          (and (= emacs-major-version 24) (< emacs-minor-version 4)))
+  (x-popup-dialog
+   t `(,(format "Sorry, you need GNU Emacs version 24.4 or higher
+to run Ohai Emacs.
+
+Your installed Emacs reports:
+%s" (emacs-version))
+       ("OK :(" . t)))
+  (save-buffers-kill-emacs t))
+
 ;; We start off by telling Emacs where we intend to keep things, and some
 ;; other basic system setup.
 
@@ -32,7 +44,7 @@
 ;; Figure out the path to our .emacs.d by getting the path part of the
 ;; current file (`init.el`).
 (setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
+                    (or (buffer-file-name) (file-chase-links load-file-name))))
 
 ;; We need to tell Emacs where to find Ohai Emacs's library packages.
 (add-to-list 'load-path (concat dotfiles-dir "ohai"))
