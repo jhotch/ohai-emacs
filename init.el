@@ -99,3 +99,6 @@ Your installed Emacs reports:
   (package-install 'rainbow-delimiters))
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; Load the user's config, if it exists.
+(load (concat dotfiles-dir "user.el") 'noerror)
