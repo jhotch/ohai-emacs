@@ -10,3 +10,5 @@
 /eshell/
 /projectile-bookmarks.eld
 /.mc-lists.el
+/user.el
+/var/

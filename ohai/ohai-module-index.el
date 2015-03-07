@@ -43,11 +43,14 @@
    (ohai-html "HTML, CSS and friends" :optional)
    (ohai-markdown "Markdown" :optional)
    (ohai-purescript "Purescript" :optional)
-   (ohai-clojure "Clojure" :optional)))
+   (ohai-clojure "Clojure" :optional)
+   (ohai-haskell "Haskell" :optional)))
 
-(defcustom ohai/modules (-map 'car
-                              (-filter (lambda (i) (equal :recommended (caddr i)))
-                                       ohai/available-modules))
+(require 'cl)
+(defcustom ohai/modules (mapcar #'car
+                                (remove-if-not
+                                 (lambda (i) (equal :recommended (caddr i)))
+                                 ohai/available-modules))
   "Your choice of Ohai Emacs modules.")
 
 (defun ohai/load-modules ()
