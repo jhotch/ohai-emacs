@@ -3,6 +3,11 @@
   (package-install 'dart-mode))
 (require 'dart-mode)
 
+;; install go mode
+(unless (package-installed-p 'go-mode)
+  (package-install 'go-mode))
+(require 'go-mode)
+
 ;; install clojure mode extra syntax highlighting
 (unless (package-installed-p 'clojure-mode-extra-font-locking)
   (package-install 'clojure-mode-extra-font-locking))
