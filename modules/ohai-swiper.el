@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; ohai-help.el --- It's dangerous to go alone! Take this.
+;;; ohai-swiper.el --- Improved incremental search.
 
 ;; Copyright (C) 2015 Bodil Stokke
 
@@ -20,21 +20,9 @@
 
 ;;; Code:
 
-(require 'ohai-package)
+(package-require 'swiper)
 
-(package-require 'guide-key)
-(setq-default guide-key/guide-key-sequence t
-              guide-key/recursive-key-sequence-flag t
-              guide-key/idle-delay 2
-              guide-key/popup-window-position 'bottom
-              guide-key/text-scale-amount -2)
-(guide-key-mode 1)
+(global-set-key (kbd "C-s") 'swiper)
 
-;; Get an instant cheat sheet for your current major mode
-;; with C-h C-m.
-(package-require 'discover-my-major)
-(global-set-key (kbd "C-h C-m") 'discover-my-major)
-
-
-
-(provide 'ohai-help)
+(provide 'ohai-swiper)
+;;; ohai-swiper.el ends here
