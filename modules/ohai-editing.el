@@ -35,6 +35,11 @@
 (global-set-key (kbd "C-\"") 'mc/mark-all-like-this-dwim)
 (global-set-key (kbd "C-M-'") 'mc/edit-lines)
 
+;; MC has `mc-hide-unmatched-lines-mode' bound to C-', which interferes
+;; with our ability to add more cursors, so we'll just clear the binding.
+;; TODO: add `mc-hide-unmatched-lines-mode' back somewhere else?
+(define-key mc/keymap (kbd "C-'") nil)
+
 ;; Use C-= to select the innermost logical unit your cursor is on.
 ;; Keep hitting C-= to expand it to the next logical unit.
 ;; Protip: this goes really well with multiple cursors.
@@ -121,8 +126,16 @@
 (defun sudo-edit (&optional arg)
   (interactive "p")
   (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+      (find-file (concat "/sudo:root@localhost:"
+                         (if (fboundp 'helm-read-file-name)
+                             (helm-read-file-name "File: ")
+                           (ido-read-file-name "File: "))))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+;; A key for intelligently shrinking whitespace.
+;; See https://github.com/jcpetkovich/shrink-whitespace.el for details.
+(package-require 'shrink-whitespace)
+(global-set-key (kbd "C-c DEL") 'shrink-whitespace)
 
 
 
