@@ -1,3 +1,6 @@
+;; With regret, activate CUA mode
+(cua-mode t)
+
 ;; install dart mode
 (unless (package-installed-p 'dart-mode)
   (package-install 'dart-mode))
