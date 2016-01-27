@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; ohai-unicode.el --- Proper Unicode setup, because you need emoji.
+;;; ohai-refactor.el --- The EMR generic refactoring package.
 
 ;; Copyright (C) 2015 Bodil Stokke
 
@@ -20,18 +20,11 @@
 
 ;;; Code:
 
-;; We use the `unicode-fonts' package to set everything up. Beware that the
-;; `unicode-fonts-setup' function takes a while to run, which is why this
-;; module isn't on by default.
-
-;; You'll need to make sure the necessary fonts are installed for this to
-;; work. See https://github.com/rolandwalker/unicode-fonts/#quickstart
-
-(use-package unicode-fonts
+(use-package emr
   :config
-  (unicode-fonts-setup))
+  (add-hook 'prog-mode-hook 'emr-initialize)
+  ;; Just hit M-RET to access your refactoring tools in any supported mode.
+  (define-key prog-mode-map (kbd "M-RET") 'emr-show-refactor-menu))
 
-
-
-(provide 'ohai-unicode)
-;;; ohai-unicode.el ends here
+(provide 'ohai-refactor)
+;;; ohai-refactor.el ends here

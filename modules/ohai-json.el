@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; ohai-unicode.el --- Proper Unicode setup, because you need emoji.
+;;; ohai-json.el --- JSON is the Universal Data Format!
 
 ;; Copyright (C) 2015 Bodil Stokke
 
@@ -18,20 +18,19 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+
+;; This file is not a proper module; it's loaded by both ohai-javascript
+;; and ohai-js-web-mode.
+
 ;;; Code:
 
-;; We use the `unicode-fonts' package to set everything up. Beware that the
-;; `unicode-fonts-setup' function takes a while to run, which is why this
-;; module isn't on by default.
-
-;; You'll need to make sure the necessary fonts are installed for this to
-;; work. See https://github.com/rolandwalker/unicode-fonts/#quickstart
-
-(use-package unicode-fonts
+;; Install json-mode and make its reformat keybinding match the global default.
+(use-package json-mode
+  :commands json-mode
   :config
-  (unicode-fonts-setup))
+  (bind-keys :map json-mode-map
+             ("C-c <tab>" . json-mode-beautify)))
 
-
-
-(provide 'ohai-unicode)
-;;; ohai-unicode.el ends here
+(provide 'ohai-json)
+;;; ohai-json.el ends here

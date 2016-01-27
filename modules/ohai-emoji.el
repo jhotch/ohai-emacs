@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; ohai-unicode.el --- Proper Unicode setup, because you need emoji.
+;;; ohai-emoji.el --- Support graphical emoji when font support is missing.
 
 ;; Copyright (C) 2015 Bodil Stokke
 
@@ -20,18 +20,19 @@
 
 ;;; Code:
 
-;; We use the `unicode-fonts' package to set everything up. Beware that the
-;; `unicode-fonts-setup' function takes a while to run, which is why this
-;; module isn't on by default.
-
-;; You'll need to make sure the necessary fonts are installed for this to
-;; work. See https://github.com/rolandwalker/unicode-fonts/#quickstart
-
-(use-package unicode-fonts
+(use-package emojify
   :config
-  (unicode-fonts-setup))
+  ;; Set emojify to only replace Unicode emoji, and do it everywhere.
+  (setq emojify-emoji-styles '(unicode)
+        emojify-inhibit-major-modes '())
+  ;; Enable it globally.
+  (add-hook 'after-init-hook #'global-emojify-mode))
+
+;; Patch emojify to replace emoji everywhere in programming modes.
+(defun emojify-valid-prog-context-p (beg end) 't)
 
 
 
-(provide 'ohai-unicode)
-;;; ohai-unicode.el ends here
+
+(provide 'ohai-emoji)
+;;; ohai-emoji.el ends here
